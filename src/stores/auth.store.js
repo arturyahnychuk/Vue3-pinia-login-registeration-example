@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 
 import { fetchWrapper } from '@/helpers'
 import { router } from '@/router'
-
 import { useAlertStore } from '@/stores'
 
 const baseUrl = `${import.meta.env.VITE_API_URL}/users`
@@ -28,7 +27,6 @@ export const useAuthStore = defineStore({
         // redirect to previous url or default to home page
         router.push(this.returnUrl || '/')
       } catch (error) {
-        console.log(error)
         const alertStore = useAlertStore()
         alertStore.error(error)
       }

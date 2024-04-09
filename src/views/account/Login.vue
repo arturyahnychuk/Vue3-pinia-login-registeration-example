@@ -43,7 +43,7 @@ async function onSubmit(values) {
         </div>
         <div class="form-group">
           <button class="btn btn-primary" :disabled="isSubmitting">
-            <span v-show="isSubmitting" class="spinner-border-sm mr-1"></span>
+            <span v-show="isSubmitting" class="spinner-border spinner-border-sm mr-1"></span>
             Login
           </button>
           <router-link to="register" class="btn btn-link">Register</router-link>
@@ -52,5 +52,3 @@ async function onSubmit(values) {
     </div>
   </div>
 </template>
-
-<style scoped></style>

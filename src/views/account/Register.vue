@@ -8,7 +8,7 @@ import { router } from '@/router'
 const schema = Yup.object().shape({
   firstName: Yup.string().required('First Name is required'),
   lastName: Yup.string().required('Last Name is required'),
-  userName: Yup.string().required('User Name is required'),
+  username: Yup.string().required('Username is required'),
   password: Yup.string()
     .required('Password is required')
     .min(6, 'Password must be at least 6 characters')
@@ -20,7 +20,7 @@ async function onSubmit(values) {
   try {
     await usersStore.register(values)
     await router.push('/account/login')
-    alertStore.success('Registeration successful')
+    alertStore.success('Registeration Successfully')
   } catch (error) {
     alertStore.error(error)
   }
@@ -42,7 +42,6 @@ async function onSubmit(values) {
           />
           <div class="invalid-feedback">{{ errors.firstName }}</div>
         </div>
-
         <div class="form-group">
           <label>Last Name</label>
           <Field
@@ -53,18 +52,16 @@ async function onSubmit(values) {
           />
           <div class="invalid-feedback">{{ errors.lastName }}</div>
         </div>
-
         <div class="form-group">
-          <label>User Name</label>
+          <label>Username</label>
           <Field
-            name="userName"
+            name="username"
             type="text"
             class="form-control"
-            :class="{ 'is-invalid': errors.userName }"
+            :class="{ 'is-invalid': errors.username }"
           />
-          <div class="invalid-feedback">{{ errors.userName }}</div>
+          <div class="invalid-feedback">{{ errors.username }}</div>
         </div>
-
         <div class="form-group">
           <label>Password</label>
           <Field
@@ -75,10 +72,9 @@ async function onSubmit(values) {
           />
           <div class="invalid-feedback">{{ errors.password }}</div>
         </div>
-
         <div class="form-group">
           <button class="btn btn-primary" :disabled="isSubmitting">
-            <span v-show="isSubmitting" class="spinner-border-sm mr-1"></span>
+            <span v-show="isSubmitting" class="spinner-border spinner-border-sm mr-1"></span>
             Register
           </button>
           <router-link to="login" class="btn btn-link">Cancel</router-link>
@@ -87,5 +83,3 @@ async function onSubmit(values) {
     </div>
   </div>
 </template>
-
-<style scoped></style>
