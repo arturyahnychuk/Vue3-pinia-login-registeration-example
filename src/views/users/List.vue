@@ -11,6 +11,7 @@ const { users } = storeToRefs(usersStore)
 
 <template>
   <h1>Users</h1>
+  <router-link to="/users/add" class="btn btn-sm btn-success mb-2">Add User</router-link>
   <table class="table table-striped">
     <thead>
       <tr>

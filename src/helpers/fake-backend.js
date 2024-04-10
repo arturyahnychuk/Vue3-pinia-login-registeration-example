@@ -97,6 +97,14 @@ function fakeBackend() {
 
         return ok()
       }
+
+      function deleteUser() {
+        if (!isAuthenticated()) return unauthorized()
+
+        users = users.filter((x) => x.id !== idFromUrl())
+        localStorage.setItem(usersKey, JSON.stringify(users))
+        return ok()
+      }
       // helper functions
 
       function ok(body) {
