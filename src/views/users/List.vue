@@ -4,9 +4,9 @@ import { storeToRefs } from 'pinia'
 import { useUsersStore } from '@/stores'
 
 const usersStore = useUsersStore()
-const { users } = storeToRefs(usersStore)
 
 usersStore.getAll()
+const { users } = storeToRefs(usersStore)
 </script>
 
 <template>

@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 import { useRoute } from 'vue-router'
 import { useUsersStore, useAlertStore } from '@/stores'
 import { storeToRefs } from 'pinia'
-
+import { router } from '@/router'
 const usersStore = useUsersStore()
 const alertStore = useAlertStore()
 const route = useRoute()
@@ -16,8 +16,8 @@ let user = null
 if (id) {
   // edit mode
   title = 'Edit User'
-  const { user } = storeToRefs(usersStore)
-  console.log(user)
+  ;({ user } = storeToRefs(usersStore))
+  usersStore.getById(id)
 }
 
 const schema = Yup.object().shape({
@@ -30,6 +30,24 @@ const schema = Yup.object().shape({
     .concat(user ? null : Yup.string().required('Password is required'))
     .min(6, 'Password must be at least 6 characters')
 })
+
+async function onSubmit(values) {
+  try {
+    let message
+    if (user) {
+      await usersStore.update(user.value.id, values)
+      message = 'User updated'
+    } else {
+      await usersStore.register(values)
+      message = 'User added'
+    }
+    await router.push('/users')
+    alertStore.success(message)
+  } catch (error) {
+    alertStore.error(error)
+    console.error(error)
+  }
+}
 </script>
 
 <template>
