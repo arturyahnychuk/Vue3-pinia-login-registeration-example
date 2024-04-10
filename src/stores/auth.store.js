@@ -30,6 +30,12 @@ export const useAuthStore = defineStore({
         const alertStore = useAlertStore()
         alertStore.error(error)
       }
+    },
+
+    async logout() {
+      this.user = null
+      localStorage.removeItem('user')
+      router.push('/account/login')
     }
   }
 })

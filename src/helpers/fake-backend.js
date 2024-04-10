@@ -60,6 +60,10 @@ function fakeBackend() {
         return ok()
       }
 
+      function getUsers() {
+        if (!isAuthenticated()) return unauthorized()
+        return ok(users.map((x) => basicDetails(x)))
+      }
       // helper functions
 
       function ok(body) {
@@ -73,6 +77,10 @@ function fakeBackend() {
       function basicDetails(user) {
         const { id, username, firstName, lastName } = user
         return { id, username, firstName, lastName }
+      }
+
+      function isAuthenticated() {
+        return opts.headers['Authorization'] === 'Bearer fake-jwt-token'
       }
 
       function body() {
